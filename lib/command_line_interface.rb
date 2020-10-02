@@ -3,8 +3,8 @@ require_relative "../lib/student.rb"
 require 'nokogiri'
 require 'colorize'
 
-class CommandLineInterface
-  BASE_PATH = "https://learn-co-curriculum.github.io/student-scraper-test-page/"
+class CommandLineInteface
+  BASE_PATH = "./fixtures/student-site/"
 
   def run
     make_students
@@ -13,7 +13,10 @@ class CommandLineInterface
   end
 
   def make_students
+    #students_array will return the scraped/parsed index page of all students
+    #it returns the nokogiri object(array thing)
     students_array = Scraper.scrape_index_page(BASE_PATH + 'index.html')
+    #this creates the student instances with the following attributes: :name, :location, :profile_url
     Student.create_from_collection(students_array)
   end
 
